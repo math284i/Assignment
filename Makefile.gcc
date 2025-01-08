@@ -1,15 +1,15 @@
 TARGET	= libmatmult.so
-LIBSRCS	= 
+LIBSRCS	= matmultlib.c
 LIBOBJS	= $(LIBSRCS:.c=.o)
 
-OPT     = -g
+OPT     = -g -O3 -ffast-math -funroll-loops -fopt-info
 PIC	= -fPIC
 
 CC      = gcc
 CFLAGS  = $(OPT) $(PIC) $(XOPTS)
 
 SOFLAGS = -shared 
-XLIBS	= 
+XLIBS	= -L/usr/lib64/atlas -lsatlas
 
 $(TARGET): $(LIBOBJS)
 	$(CC) -o $@ $(SOFLAGS) $(LIBOBJS) $(XLIBS)
